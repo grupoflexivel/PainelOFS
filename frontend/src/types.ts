@@ -8,6 +8,7 @@ export interface PainelOrdem {
   quantidade: number;
   situacaoLabel: string;
   colorToken: ColorToken;
+  simulacao: string | null;
 }
 
 export interface PainelSnapshot {

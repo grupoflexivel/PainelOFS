@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapSituacaoColor, parseQuantidadeBR } from "../src/mappers.js";
+import { extractControle, mapSituacaoColor, parseQuantidadeBR } from "../src/mappers.js";
 
 describe("parseQuantidadeBR", () => {
   it("parses a simple decimal value", () => {
@@ -29,5 +29,19 @@ describe("mapSituacaoColor", () => {
 
   it("falls back to a neutral color for an unrecognized situacaoDescricao", () => {
     expect(mapSituacaoColor("Algo Novo Que A API Ainda Não Manda")).toBe("gray");
+  });
+});
+
+describe("extractControle", () => {
+  it("reads controle from the first item in data", () => {
+    expect(extractControle({ data: [{ controle: "S-39385" }] })).toBe("S-39385");
+  });
+
+  it("returns null when data is empty", () => {
+    expect(extractControle({ data: [] })).toBeNull();
+  });
+
+  it("returns null when controle is an empty string", () => {
+    expect(extractControle({ data: [{ controle: "" }] })).toBeNull();
   });
 });

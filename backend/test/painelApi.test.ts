@@ -35,10 +35,12 @@ const sampleUpstream: UpstreamPainelResponse = {
   ],
 };
 
+const fetchDetailWithControle = vi.fn().mockResolvedValue({ data: [{ controle: "S-39385" }] });
+
 describe("GET /api/painel", () => {
-  it("returns the mapped snapshot after a successful upstream fetch", async () => {
+  it("returns the mapped snapshot, including the simulacao (controle) fetched per OF", async () => {
     const config = testConfig();
-    const cache = new PainelCache(config, vi.fn().mockResolvedValue(sampleUpstream));
+    const cache = new PainelCache(config, vi.fn().mockResolvedValue(sampleUpstream), fetchDetailWithControle);
     await cache.refresh();
     const app = createApp(cache, config);
 
@@ -56,6 +58,7 @@ describe("GET /api/painel", () => {
         quantidade: 201,
         situacaoLabel: "Gerada",
         colorToken: "white",
+        simulacao: "S-39385",
       },
     ]);
   });
@@ -63,7 +66,7 @@ describe("GET /api/painel", () => {
   it("keeps serving the last good snapshot, marked stale, when the upstream fetch fails", async () => {
     const config = testConfig();
     const flakyFetch = vi.fn().mockResolvedValueOnce(sampleUpstream).mockRejectedValueOnce(new Error("timeout"));
-    const cache = new PainelCache(config, flakyFetch);
+    const cache = new PainelCache(config, flakyFetch, fetchDetailWithControle);
     await cache.refresh();
     await cache.refresh();
     const app = createApp(cache, config);
@@ -77,19 +80,42 @@ describe("GET /api/painel", () => {
 
   it("returns 503 when no snapshot has ever been fetched", async () => {
     const config = testConfig();
-    const cache = new PainelCache(config, vi.fn().mockRejectedValue(new Error("unreachable")));
+    const cache = new PainelCache(config, vi.fn().mockRejectedValue(new Error("unreachable")), fetchDetailWithControle);
     const app = createApp(cache, config);
 
     const res = await request(app).get("/api/painel");
 
     expect(res.status).toBe(503);
   });
+
+  it("sets simulacao to null for a single OF whose detail fetch fails, without affecting the rest", async () => {
+    const config = testConfig();
+    const twoOrdens: UpstreamPainelResponse = {
+      ...sampleUpstream,
+      ordens: [
+        sampleUpstream.ordens[0],
+        { ...sampleUpstream.ordens[0], numeroOF: "114163" },
+      ],
+    };
+    const fetchDetail = vi.fn((_config, numeroOF: string) =>
+      numeroOF === "114162"
+        ? Promise.resolve({ data: [{ controle: "S-39385" }] })
+        : Promise.reject(new Error("timeout")),
+    );
+    const cache = new PainelCache(config, vi.fn().mockResolvedValue(twoOrdens), fetchDetail);
+
+    const snapshot = await cache.refresh();
+
+    expect(snapshot.stale).toBe(false);
+    expect(snapshot.ordens.find((o) => o.numeroOF === "114162")?.simulacao).toBe("S-39385");
+    expect(snapshot.ordens.find((o) => o.numeroOF === "114163")?.simulacao).toBeNull();
+  });
 });
 
 describe("GET /api/config", () => {
   it("exposes the refresh interval in milliseconds, matching the polling config", async () => {
     const config = testConfig({ PAINEL_REFRESH_INTERVAL_MINUTES: 5 });
-    const cache = new PainelCache(config, vi.fn().mockResolvedValue(sampleUpstream));
+    const cache = new PainelCache(config, vi.fn().mockResolvedValue(sampleUpstream), fetchDetailWithControle);
     const app = createApp(cache, config);
 
     const res = await request(app).get("/api/config");

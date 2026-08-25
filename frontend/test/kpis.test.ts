@@ -11,6 +11,7 @@ function ordem(overrides: Partial<PainelOrdem> = {}): PainelOrdem {
     quantidade: 0,
     situacaoLabel: "Gerada",
     colorToken: "white",
+    simulacao: null,
     ...overrides,
   };
 }

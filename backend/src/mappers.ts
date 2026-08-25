@@ -25,3 +25,16 @@ const CORES_POR_SITUACAO: Record<string, ColorToken> = {
 export function mapSituacaoColor(situacaoDescricao: string): ColorToken {
   return CORES_POR_SITUACAO[situacaoDescricao] ?? "gray";
 }
+
+export interface OrdemFabricacaoDetailResponse {
+  data: { controle?: string }[];
+}
+
+// GET /api/ppcppadrao/v10/ordemFabricacao/{numeroOF} devolve `controle` no
+// formato "S-<numero da simulação>" (ex.: "S-39385") quando a OF veio de uma
+// simulação. Tratamos ausência de dado e string vazia da mesma forma: sem
+// simulação vinculada.
+export function extractControle(response: OrdemFabricacaoDetailResponse): string | null {
+  const controle = response.data[0]?.controle;
+  return controle ? controle : null;
+}

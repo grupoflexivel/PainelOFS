@@ -6,7 +6,7 @@ interface PainelTableProps {
   ordens: PainelOrdem[];
 }
 
-const COLUMNS = ["Ordem Fab.", "Data", "Engenharia", "Nome", "Quantidade"];
+const COLUMNS = ["Ordem Fab.", "Simulação", "Data", "Engenharia", "Nome", "Quantidade"];
 
 export function PainelTable({ ordens }: PainelTableProps) {
   return (
@@ -39,6 +39,7 @@ export function PainelTable({ ordens }: PainelTableProps) {
                 />
               </td>
               <td className="px-4 py-2 font-mono text-ink">{ordem.numeroOF}</td>
+              <td className="px-4 py-2 font-mono text-ink-muted">{ordem.simulacao ?? "—"}</td>
               <td className="px-4 py-2 font-mono text-ink-muted">{ordem.dataInicio}</td>
               <td className="px-4 py-2 font-mono text-ink-muted">{ordem.codEngenharia}</td>
               <td className="px-4 py-2 text-ink">{ordem.descricaoEngenharia}</td>
