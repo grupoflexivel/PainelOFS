@@ -8,16 +8,16 @@ interface KpiCardsProps {
 
 function KpiCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white px-5 py-3 shadow-sm">
-      <p className="font-mono text-xs uppercase tracking-widest text-slate-500">{label}</p>
-      <p className="mt-1 font-mono text-2xl font-semibold text-sky-700">{value}</p>
+    <div className="rounded-lg border border-line border-l-[3px] border-l-accent bg-surface px-4 py-3">
+      <p className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">{label}</p>
+      <p className="mt-1.5 font-mono text-2xl font-semibold leading-none text-accent">{value}</p>
     </div>
   );
 }
 
 export function KpiCards({ ordens }: KpiCardsProps) {
   return (
-    <div className="flex flex-wrap gap-4 px-6 py-4">
+    <div className="grid grid-cols-2 gap-3 px-6 py-4 sm:max-w-md">
       <KpiCard label="Quantidade a Produzir" value={formatQuantidadeBR(sumQuantidade(ordens))} />
       <KpiCard label="Quantidade de OFs" value={String(ordens.length)} />
     </div>

@@ -1,10 +1,36 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-ground: #eef1f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f7f9fb;
+  --color-ink: #16212d;
+  --color-ink-muted: #5c6c7a;
+  --color-ink-faint: #8695a3;
+  --color-line: #dde4ea;
+  --color-accent: #1f3a52;
+  --color-accent-soft: #eaf0f5;
+  --color-good: #227a52;
+  --color-bad: #c53030;
+
+  --color-st-gerada-fill: #ffffff;
+  --color-st-gerada-rail: #94a3b3;
+  --color-st-recebido-fill: #fce8b9;
+  --color-st-recebido-rail: #b7791f;
+  --color-st-inspecao-fill: #f7c6c6;
+  --color-st-inspecao-rail: #c53030;
+  --color-st-liberada-fill: #beead0;
+  --color-st-liberada-rail: #227a52;
+  --color-st-reprovado-fill: #e7c3ee;
+  --color-st-reprovado-rail: #8a3a9e;
+  --color-st-baixada-fill: #bfe0f7;
+  --color-st-baixada-rail: #2b6cb0;
+}
+
 body {
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
+  background: var(--color-ground);
+  color: var(--color-ink);
 }

@@ -26,29 +26,34 @@ export function Header({ atualizadoEm, fetchedAt, refreshIntervalMs, connectionE
   const msUntilNext = fetchedAt ? new Date(fetchedAt).getTime() + refreshIntervalMs - now : null;
 
   const status = connectionError
-    ? { text: "SEM CONEXÃO", dotClass: "bg-red-500" }
+    ? { text: "sem conexão", dotClass: "bg-bad" }
     : stale
-      ? { text: "DADOS DESATUALIZADOS", dotClass: "bg-amber-500" }
-      : { text: "AO VIVO", dotClass: "bg-emerald-500 animate-pulse" };
+      ? { text: "dados desatualizados", dotClass: "bg-st-recebido-rail" }
+      : { text: "ao vivo", dotClass: "bg-good animate-pulse" };
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4 shadow-sm">
-      <div>
-        <h1 className="font-mono text-lg font-semibold tracking-wide text-sky-700">PAINEL DE PRODUÇÃO · OF</h1>
-        <p className="font-mono text-xs text-slate-500">
-          {atualizadoEm ? `Atualizado em ${atualizadoEm}` : "Aguardando primeira atualização..."}
-        </p>
-      </div>
-      <div className="flex items-center gap-6 font-mono text-xs text-slate-500">
-        {msUntilNext !== null && !connectionError && (
-          <span>
-            próxima atualização em <span className="text-slate-800">{formatCountdown(msUntilNext)}</span>
+    <header className="border-b border-line bg-surface">
+      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
+        <div className="flex flex-col gap-0.5">
+          <span className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">Painel de Produção</span>
+          <h1 className="text-lg font-semibold text-accent">Ordens de Fabricação</h1>
+        </div>
+        <div className="flex items-center gap-6 font-mono text-xs text-ink-muted">
+          <div className="flex flex-col items-end gap-0.5">
+            <span>atualizado em</span>
+            <span className="text-ink">{atualizadoEm ?? "—"}</span>
+          </div>
+          {msUntilNext !== null && !connectionError && (
+            <div className="flex flex-col items-end gap-0.5">
+              <span>próxima em</span>
+              <span className="text-ink">{formatCountdown(msUntilNext)}</span>
+            </div>
+          )}
+          <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
+            <span className={`h-1.5 w-1.5 rounded-full ${status.dotClass}`} />
+            {status.text}
           </span>
-        )}
-        <span className="flex items-center gap-2">
-          <span className={`h-2.5 w-2.5 rounded-full ${status.dotClass}`} />
-          {status.text}
-        </span>
+        </div>
       </div>
     </header>
   );
