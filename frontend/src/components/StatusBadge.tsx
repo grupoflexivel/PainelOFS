@@ -10,7 +10,7 @@ export function StatusBadge({ label, colorToken }: StatusBadgeProps) {
   const dotClass = dotClassFor(colorToken);
 
   return (
-    <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-slate-300">
+    <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-slate-600">
       <span data-testid="status-dot" className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
       {label}
     </span>

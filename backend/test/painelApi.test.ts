@@ -54,7 +54,7 @@ describe("GET /api/painel", () => {
         codEngenharia: "0403010032-1",
         descricaoEngenharia: "FLEXX IF ADT 423",
         quantidade: 201,
-        situacaoLabel: "Geradas",
+        situacaoLabel: "Gerada",
         colorToken: "white",
       },
     ]);

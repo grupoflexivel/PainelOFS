@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapSituacao, parseQuantidadeBR } from "../src/mappers.js";
+import { mapSituacaoColor, parseQuantidadeBR } from "../src/mappers.js";
 
 describe("parseQuantidadeBR", () => {
   it("parses a simple decimal value", () => {
@@ -15,19 +15,19 @@ describe("parseQuantidadeBR", () => {
   });
 });
 
-describe("mapSituacao", () => {
+describe("mapSituacaoColor", () => {
   it.each([
-    [0, "Geradas", "white"],
-    [1, "Recebido Qualidade", "yellow"],
-    [2, "Em Inspeção", "red"],
-    [3, "Liberadas", "green"],
-    [4, "Reprovado", "purple"],
-    [6, "OF Finalizada", "blue"],
-  ])("maps situacao code %i to %s / %s", (codigo, label, colorToken) => {
-    expect(mapSituacao(codigo)).toEqual({ label, colorToken });
+    ["Gerada", "white"],
+    ["Recebido Qualidade", "yellow"],
+    ["Em Inspeção", "red"],
+    ["Liberada Qualidade", "green"],
+    ["Reprovado", "purple"],
+    ["OF Baixada", "blue"],
+  ])("maps the API's situacaoDescricao %j to color %s", (situacaoDescricao, colorToken) => {
+    expect(mapSituacaoColor(situacaoDescricao)).toBe(colorToken);
   });
 
-  it("falls back to a neutral label/color for an unknown code", () => {
-    expect(mapSituacao(99)).toEqual({ label: "Desconhecida", colorToken: "gray" });
+  it("falls back to a neutral color for an unrecognized situacaoDescricao", () => {
+    expect(mapSituacaoColor("Algo Novo Que A API Ainda Não Manda")).toBe("gray");
   });
 });

@@ -1,5 +1,5 @@
 import type { Config } from "./config.js";
-import { mapSituacao, parseQuantidadeBR, type ColorToken } from "./mappers.js";
+import { mapSituacaoColor, parseQuantidadeBR, type ColorToken } from "./mappers.js";
 import { fetchPainelUpstream, type UpstreamPainelResponse } from "./upstreamClient.js";
 
 export interface PainelOrdem {
@@ -25,18 +25,15 @@ type FetchUpstream = (config: Config) => Promise<UpstreamPainelResponse>;
 function toSnapshot(upstream: UpstreamPainelResponse): PainelSnapshot {
   return {
     atualizadoEm: upstream.atualizadoEm,
-    ordens: upstream.ordens.map((ordem) => {
-      const { label, colorToken } = mapSituacao(ordem.situacao);
-      return {
-        numeroOF: ordem.numeroOF,
-        dataInicio: ordem.dataInicio,
-        codEngenharia: ordem.codEngenharia,
-        descricaoEngenharia: ordem.descricaoEngenharia,
-        quantidade: parseQuantidadeBR(ordem.quantidadeProgramada),
-        situacaoLabel: label,
-        colorToken,
-      };
-    }),
+    ordens: upstream.ordens.map((ordem) => ({
+      numeroOF: ordem.numeroOF,
+      dataInicio: ordem.dataInicio,
+      codEngenharia: ordem.codEngenharia,
+      descricaoEngenharia: ordem.descricaoEngenharia,
+      quantidade: parseQuantidadeBR(ordem.quantidadeProgramada),
+      situacaoLabel: ordem.situacaoDescricao,
+      colorToken: mapSituacaoColor(ordem.situacaoDescricao),
+    })),
     fetchedAt: new Date().toISOString(),
     stale: false,
   };

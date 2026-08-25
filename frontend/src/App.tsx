@@ -7,7 +7,7 @@ export function App() {
   const { snapshot, refreshIntervalMs, loading, connectionError } = usePainelData();
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-200">
+    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
       <Header
         atualizadoEm={snapshot?.atualizadoEm}
         fetchedAt={snapshot?.fetchedAt}
@@ -20,7 +20,7 @@ export function App() {
           <p className="px-6 py-12 text-center font-mono text-sm text-slate-500">Carregando painel...</p>
         )}
         {connectionError && !snapshot && (
-          <p className="px-6 py-12 text-center font-mono text-sm text-rose-400">
+          <p className="px-6 py-12 text-center font-mono text-sm text-red-600">
             Não foi possível carregar os dados do painel.
           </p>
         )}

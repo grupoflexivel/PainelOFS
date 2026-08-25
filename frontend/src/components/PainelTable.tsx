@@ -12,12 +12,12 @@ export function PainelTable({ ordens }: PainelTableProps) {
   return (
     <div className="overflow-auto">
       <table className="w-full border-collapse text-sm">
-        <thead className="sticky top-0 bg-slate-900/95 backdrop-blur">
+        <thead className="sticky top-0 bg-slate-100/95 backdrop-blur">
           <tr>
             {COLUMNS.map((coluna) => (
               <th
                 key={coluna}
-                className="border-b border-slate-700 px-4 py-3 text-left font-mono text-xs uppercase tracking-widest text-cyan-400"
+                className="border-b border-slate-300 px-4 py-3 text-left font-mono text-xs uppercase tracking-widest text-sky-700"
               >
                 {coluna}
               </th>
@@ -28,13 +28,14 @@ export function PainelTable({ ordens }: PainelTableProps) {
           {ordens.map((ordem) => (
             <tr
               key={ordem.numeroOF}
-              className={`border-b border-l-4 border-slate-800/80 ${rowAccentClassFor(ordem.colorToken)} transition-colors hover:bg-slate-800/40`}
+              title={ordem.situacaoLabel}
+              className={`border-b border-l-4 border-slate-200 ${rowAccentClassFor(ordem.colorToken)} transition-colors hover:brightness-95`}
             >
-              <td className="px-4 py-2.5 font-mono text-slate-200">{ordem.numeroOF}</td>
-              <td className="px-4 py-2.5 font-mono text-slate-400">{ordem.dataInicio}</td>
-              <td className="px-4 py-2.5 font-mono text-slate-400">{ordem.codEngenharia}</td>
-              <td className="px-4 py-2.5 text-slate-100">{ordem.descricaoEngenharia}</td>
-              <td className="px-4 py-2.5 text-right font-mono text-slate-200">{formatQuantidadeBR(ordem.quantidade)}</td>
+              <td className="px-4 py-2.5 font-mono text-slate-900">{ordem.numeroOF}</td>
+              <td className="px-4 py-2.5 font-mono text-slate-600">{ordem.dataInicio}</td>
+              <td className="px-4 py-2.5 font-mono text-slate-600">{ordem.codEngenharia}</td>
+              <td className="px-4 py-2.5 text-slate-900">{ordem.descricaoEngenharia}</td>
+              <td className="px-4 py-2.5 text-right font-mono text-slate-900">{formatQuantidadeBR(ordem.quantidade)}</td>
             </tr>
           ))}
         </tbody>
