@@ -1,4 +1,5 @@
 import { Header } from "./components/Header";
+import { KpiCards } from "./components/KpiCards";
 import { PainelTable } from "./components/PainelTable";
 import { StatusLegend } from "./components/StatusLegend";
 import { usePainelData } from "./hooks/usePainelData";
@@ -24,7 +25,12 @@ export function App() {
             Não foi possível carregar os dados do painel.
           </p>
         )}
-        {snapshot && <PainelTable ordens={snapshot.ordens} />}
+        {snapshot && (
+          <>
+            <KpiCards ordens={snapshot.ordens} />
+            <PainelTable ordens={snapshot.ordens} />
+          </>
+        )}
       </main>
       <StatusLegend />
     </div>
