@@ -1,6 +1,6 @@
 import type { PainelOrdem } from "../types";
 import { formatQuantidadeBR } from "../lib/format";
-import { rowAccentClassFor } from "../lib/colorTokens";
+import { bgClassFor, borderClassFor } from "../lib/colorTokens";
 
 interface PainelTableProps {
   ordens: PainelOrdem[];
@@ -29,7 +29,7 @@ export function PainelTable({ ordens }: PainelTableProps) {
             <tr
               key={ordem.numeroOF}
               title={ordem.situacaoLabel}
-              className={`border-b border-l-4 border-slate-200 ${rowAccentClassFor(ordem.colorToken)} transition-colors hover:brightness-95`}
+              className={`border-b border-l-4 border-slate-200 ${borderClassFor(ordem.colorToken)} ${bgClassFor(ordem.colorToken)} transition-colors hover:brightness-95`}
             >
               <td className="px-4 py-2.5 font-mono text-slate-900">{ordem.numeroOF}</td>
               <td className="px-4 py-2.5 font-mono text-slate-600">{ordem.dataInicio}</td>
