@@ -11,15 +11,16 @@ export type ColorToken = "white" | "yellow" | "red" | "green" | "purple" | "blue
 // assim o painel nunca discorda do que a API está de fato dizendo.
 // "Gerada", "Recebida Qualidade", "Em Inspeção", "Liberada Qualidade" e
 // "OF Baixada" foram confirmados contra a API real (25-26/08/2026).
-// "Reprovado" ainda vem só da legenda do painel antigo — nenhuma ordem
-// observada até agora passou por esse status; vale conferir o texto exato
-// assim que uma passar.
+// Nenhuma OF observada até agora passou por "reprovado" — registramos as
+// duas grafias (a API já mandou "Recebida", não "Recebido", então o gênero
+// não é previsível) pra não cair no cinza de fallback de qualquer jeito.
 const CORES_POR_SITUACAO: Record<string, ColorToken> = {
   Gerada: "white",
   "Recebida Qualidade": "yellow",
   "Em Inspeção": "red",
   "Liberada Qualidade": "green",
   Reprovado: "purple",
+  Reprovada: "purple",
   "OF Baixada": "blue",
 };
 
