@@ -25,7 +25,7 @@ export function PainelTable({ ordens }: PainelTableProps) {
             ))}
           </tr>
         </thead>
-        <tbody className="font-bold">
+        <tbody>
           {ordens.map((ordem) => (
             <tr
               key={ordem.numeroOF}
@@ -38,12 +38,12 @@ export function PainelTable({ ordens }: PainelTableProps) {
                   className={`block h-3.5 w-3.5 rounded-sm border ${borderClassFor(ordem.colorToken)} ${bgClassFor(ordem.colorToken)}`}
                 />
               </td>
-              <td className="px-4 py-2 font-mono text-ink">{ordem.numeroOF}</td>
-              <td className="px-4 py-2 font-mono text-ink-muted">{ordem.simulacao ?? "—"}</td>
-              <td className="px-4 py-2 font-mono text-ink-muted">{ordem.dataInicio}</td>
-              <td className="px-4 py-2 font-mono text-ink-muted">{ordem.codEngenharia}</td>
-              <td className="px-4 py-2 text-ink">{ordem.descricaoEngenharia}</td>
-              <td className="px-4 py-2 text-right font-mono text-ink">{formatQuantidadeBR(ordem.quantidade)}</td>
+              <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.numeroOF}</td>
+              <td className="px-4 py-2 font-mono font-bold text-ink-muted">{ordem.simulacao ?? "—"}</td>
+              <td className="px-4 py-2 font-mono font-bold text-ink-muted">{ordem.dataInicio}</td>
+              <td className="px-4 py-2 font-mono font-bold text-ink-muted">{ordem.codEngenharia}</td>
+              <td className="px-4 py-2 font-bold text-ink">{ordem.descricaoEngenharia}</td>
+              <td className="px-4 py-2 text-right font-mono font-bold text-ink">{formatQuantidadeBR(ordem.quantidade)}</td>
             </tr>
           ))}
         </tbody>
