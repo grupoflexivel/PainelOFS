@@ -25,7 +25,7 @@ export function PainelTable({ ordens }: PainelTableProps) {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="font-semibold">
           {ordens.map((ordem) => (
             <tr
               key={ordem.numeroOF}
