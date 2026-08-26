@@ -42,7 +42,7 @@ export function PainelTable({ ordens }: PainelTableProps) {
               <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.simulacao ?? "—"}</td>
               <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.dataInicio}</td>
               <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.codEngenharia}</td>
-              <td className="px-4 py-2 font-bold text-ink">{ordem.descricaoEngenharia}</td>
+              <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.descricaoEngenharia}</td>
               <td className="px-4 py-2 text-right font-mono font-bold text-ink">{formatQuantidadeBR(ordem.quantidade)}</td>
             </tr>
           ))}
