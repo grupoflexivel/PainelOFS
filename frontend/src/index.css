@@ -14,20 +14,20 @@
   --color-accent: #1f3a52;
   --color-accent-soft: #eaf0f5;
   --color-good: #227a52;
-  --color-bad: #c53030;
+  --color-bad: #dc2626;
 
   --color-st-gerada-fill: #ffffff;
-  --color-st-gerada-rail: #94a3b3;
-  --color-st-recebido-fill: #fce8b9;
-  --color-st-recebido-rail: #b7791f;
-  --color-st-inspecao-fill: #f7c6c6;
-  --color-st-inspecao-rail: #c53030;
-  --color-st-liberada-fill: #beead0;
-  --color-st-liberada-rail: #227a52;
-  --color-st-reprovado-fill: #e7c3ee;
-  --color-st-reprovado-rail: #8a3a9e;
-  --color-st-baixada-fill: #bfe0f7;
-  --color-st-baixada-rail: #2b6cb0;
+  --color-st-gerada-rail: #64748b;
+  --color-st-recebido-fill: #fcd34d;
+  --color-st-recebido-rail: #b45309;
+  --color-st-inspecao-fill: #fca5a5;
+  --color-st-inspecao-rail: #dc2626;
+  --color-st-liberada-fill: #6ee7b7;
+  --color-st-liberada-rail: #047857;
+  --color-st-reprovado-fill: #f0abfc;
+  --color-st-reprovado-rail: #a21caf;
+  --color-st-baixada-fill: #7dd3fc;
+  --color-st-baixada-rail: #0369a1;
 }
 
 body {
