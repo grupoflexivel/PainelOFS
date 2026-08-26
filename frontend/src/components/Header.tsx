@@ -28,9 +28,9 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function KpiStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-md border border-line border-l-2 border-l-accent px-3 py-1">
+    <div className="rounded-md border border-line border-l-2 border-l-accent px-4 py-1 text-center">
       <p className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">{label}</p>
-      <p className="font-mono text-base font-bold leading-tight text-accent">{value}</p>
+      <p className="font-mono text-xl font-bold leading-tight text-accent">{value}</p>
     </div>
   );
 }
