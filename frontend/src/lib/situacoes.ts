@@ -9,6 +9,6 @@ export const LEGENDA_SITUACOES: { label: string; colorToken: ColorToken }[] = [
   { label: "Recebida Qualidade", colorToken: "yellow" },
   { label: "Em Inspeção", colorToken: "red" },
   { label: "Liberada Qualidade", colorToken: "green" },
-  { label: "Reprovado/Reprovada", colorToken: "purple" },
+  { label: "Reprovada", colorToken: "purple" },
   { label: "OF Baixada", colorToken: "blue" },
 ];
