@@ -14,11 +14,11 @@ export function PainelTable({ ordens }: PainelTableProps) {
       <table className="w-full border-collapse text-[13.5px]">
         <thead className="sticky top-0 bg-surface-2">
           <tr>
-            <th className="w-9 border-b border-line px-4 py-2.5" />
+            <th className="w-9 border-b border-line px-4 py-2" />
             {COLUMNS.map((coluna) => (
               <th
                 key={coluna}
-                className="whitespace-nowrap border-b border-line px-4 py-2.5 text-left font-mono text-[11px] font-bold uppercase tracking-widest text-ink-muted"
+                className="whitespace-nowrap border-b border-line px-4 py-2 text-left font-mono text-[11px] font-bold uppercase tracking-widest text-ink-muted"
               >
                 {coluna}
               </th>
@@ -32,18 +32,18 @@ export function PainelTable({ ordens }: PainelTableProps) {
               title={ordem.situacaoLabel}
               className={`border-b border-l-4 border-line ${borderClassFor(ordem.colorToken)} ${bgClassFor(ordem.colorToken)} transition-[filter] hover:brightness-95`}
             >
-              <td className="px-4 py-2">
+              <td className="px-4 py-1.5">
                 <span
                   aria-hidden
                   className={`block h-3.5 w-3.5 rounded-sm border ${borderClassFor(ordem.colorToken)} ${bgClassFor(ordem.colorToken)}`}
                 />
               </td>
-              <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.numeroOF}</td>
-              <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.simulacao ?? "—"}</td>
-              <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.dataInicio}</td>
-              <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.codEngenharia}</td>
-              <td className="px-4 py-2 font-mono font-bold text-ink">{ordem.descricaoEngenharia}</td>
-              <td className="px-4 py-2 text-right font-mono font-bold text-ink">{formatQuantidadeBR(ordem.quantidade)}</td>
+              <td className="px-4 py-1.5 font-mono font-bold text-ink">{ordem.numeroOF}</td>
+              <td className="px-4 py-1.5 font-mono font-bold text-ink">{ordem.simulacao ?? "—"}</td>
+              <td className="px-4 py-1.5 font-mono font-bold text-ink">{ordem.dataInicio}</td>
+              <td className="px-4 py-1.5 font-mono font-bold text-ink">{ordem.codEngenharia}</td>
+              <td className="px-4 py-1.5 font-mono font-bold text-ink">{ordem.descricaoEngenharia}</td>
+              <td className="px-4 py-1.5 text-right font-mono font-bold text-ink">{formatQuantidadeBR(ordem.quantidade)}</td>
             </tr>
           ))}
         </tbody>

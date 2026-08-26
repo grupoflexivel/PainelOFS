@@ -6,6 +6,8 @@ interface HeaderProps {
   refreshIntervalMs: number;
   connectionError: boolean;
   stale: boolean;
+  quantidadeAProduzir: string | undefined;
+  quantidadeDeOFs: string | undefined;
 }
 
 function formatCountdown(ms: number): string {
@@ -15,7 +17,24 @@ function formatCountdown(ms: number): string {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
-export function Header({ atualizadoEm, fetchedAt, refreshIntervalMs, connectionError, stale }: HeaderProps) {
+function Stat({ label, value, emphasize = false }: { label: string; value: string; emphasize?: boolean }) {
+  return (
+    <div className="flex flex-col items-end gap-0.5">
+      <span className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">{label}</span>
+      <span className={emphasize ? "font-mono text-base font-bold text-accent" : "font-mono text-xs text-ink"}>{value}</span>
+    </div>
+  );
+}
+
+export function Header({
+  atualizadoEm,
+  fetchedAt,
+  refreshIntervalMs,
+  connectionError,
+  stale,
+  quantidadeAProduzir,
+  quantidadeDeOFs,
+}: HeaderProps) {
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -33,22 +52,16 @@ export function Header({ atualizadoEm, fetchedAt, refreshIntervalMs, connectionE
 
   return (
     <header className="border-b border-line bg-surface">
-      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-2.5">
         <div className="flex flex-col gap-0.5">
           <span className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">Painel de Produção</span>
           <h1 className="text-lg font-semibold text-accent">Ordens de Fabricação</h1>
         </div>
-        <div className="flex items-center gap-6 font-mono text-xs text-ink-muted">
-          <div className="flex flex-col items-end gap-0.5">
-            <span>atualizado em</span>
-            <span className="text-ink">{atualizadoEm ?? "—"}</span>
-          </div>
-          {msUntilNext !== null && !connectionError && (
-            <div className="flex flex-col items-end gap-0.5">
-              <span>próxima em</span>
-              <span className="text-ink">{formatCountdown(msUntilNext)}</span>
-            </div>
-          )}
+        <div className="flex items-center gap-6">
+          {quantidadeAProduzir !== undefined && <Stat label="a produzir" value={quantidadeAProduzir} emphasize />}
+          {quantidadeDeOFs !== undefined && <Stat label="OFs" value={quantidadeDeOFs} emphasize />}
+          <Stat label="atualizado em" value={atualizadoEm ?? "—"} />
+          {msUntilNext !== null && !connectionError && <Stat label="próxima em" value={formatCountdown(msUntilNext)} />}
           <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
             <span className={`h-1.5 w-1.5 rounded-full ${status.dotClass}`} />
             {status.text}
