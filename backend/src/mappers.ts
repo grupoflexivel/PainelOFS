@@ -9,13 +9,14 @@ export type ColorToken = "white" | "yellow" | "red" | "green" | "purple" | "blue
 // A cor de cada linha é decidida pelo texto que a própria API manda em
 // `situacaoDescricao` (ex.: "OF Baixada"), não por um código numérico —
 // assim o painel nunca discorda do que a API está de fato dizendo.
-// "Gerada", "Liberada Qualidade" e "OF Baixada" foram confirmados contra a
-// API real; "Recebido Qualidade", "Em Inspeção" e "Reprovado" vêm da legenda
-// do painel antigo e ainda não foram observados numa resposta real — vale
-// conferir assim que uma ordem passar por esses status.
+// "Gerada", "Recebida Qualidade", "Em Inspeção", "Liberada Qualidade" e
+// "OF Baixada" foram confirmados contra a API real (25-26/08/2026).
+// "Reprovado" ainda vem só da legenda do painel antigo — nenhuma ordem
+// observada até agora passou por esse status; vale conferir o texto exato
+// assim que uma passar.
 const CORES_POR_SITUACAO: Record<string, ColorToken> = {
   Gerada: "white",
-  "Recebido Qualidade": "yellow",
+  "Recebida Qualidade": "yellow",
   "Em Inspeção": "red",
   "Liberada Qualidade": "green",
   Reprovado: "purple",

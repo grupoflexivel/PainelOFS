@@ -18,7 +18,7 @@ describe("parseQuantidadeBR", () => {
 describe("mapSituacaoColor", () => {
   it.each([
     ["Gerada", "white"],
-    ["Recebido Qualidade", "yellow"],
+    ["Recebida Qualidade", "yellow"],
     ["Em Inspeção", "red"],
     ["Liberada Qualidade", "green"],
     ["Reprovado", "purple"],

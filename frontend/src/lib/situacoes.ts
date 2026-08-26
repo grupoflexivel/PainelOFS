@@ -6,7 +6,7 @@ import type { ColorToken } from "../types";
 // situacaoLabel/colorToken prontos do backend.
 export const LEGENDA_SITUACOES: { label: string; colorToken: ColorToken }[] = [
   { label: "Gerada", colorToken: "white" },
-  { label: "Recebido Qualidade", colorToken: "yellow" },
+  { label: "Recebida Qualidade", colorToken: "yellow" },
   { label: "Em Inspeção", colorToken: "red" },
   { label: "Liberada Qualidade", colorToken: "green" },
   { label: "Reprovado", colorToken: "purple" },
