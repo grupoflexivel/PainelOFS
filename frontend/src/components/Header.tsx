@@ -17,11 +17,20 @@ function formatCountdown(ms: number): string {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
-function Stat({ label, value, emphasize = false }: { label: string; value: string; emphasize?: boolean }) {
+function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-end gap-0.5">
       <span className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">{label}</span>
-      <span className={emphasize ? "font-mono text-base font-bold text-accent" : "font-mono text-xs text-ink"}>{value}</span>
+      <span className="font-mono text-xs text-ink">{value}</span>
+    </div>
+  );
+}
+
+function KpiStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-md border border-line border-l-2 border-l-accent px-3 py-1">
+      <p className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">{label}</p>
+      <p className="font-mono text-base font-bold leading-tight text-accent">{value}</p>
     </div>
   );
 }
@@ -58,8 +67,8 @@ export function Header({
           <h1 className="text-lg font-semibold text-accent">Ordens de Fabricação</h1>
         </div>
         <div className="flex items-center gap-6">
-          {quantidadeAProduzir !== undefined && <Stat label="a produzir" value={quantidadeAProduzir} emphasize />}
-          {quantidadeDeOFs !== undefined && <Stat label="OFs" value={quantidadeDeOFs} emphasize />}
+          {quantidadeAProduzir !== undefined && <KpiStat label="a produzir" value={quantidadeAProduzir} />}
+          {quantidadeDeOFs !== undefined && <KpiStat label="OFs" value={quantidadeDeOFs} />}
           <Stat label="atualizado em" value={atualizadoEm ?? "—"} />
           {msUntilNext !== null && !connectionError && <Stat label="próxima em" value={formatCountdown(msUntilNext)} />}
           <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
