@@ -68,7 +68,7 @@ export function Header({
         </div>
         <div className="flex items-center gap-6">
           {quantidadeAProduzir !== undefined && <KpiStat label="a produzir" value={quantidadeAProduzir} />}
-          {quantidadeDeOFs !== undefined && <KpiStat label="OFs" value={quantidadeDeOFs} />}
+          {quantidadeDeOFs !== undefined && <KpiStat label="Qtd OFs" value={quantidadeDeOFs} />}
           <Stat label="atualizado em" value={atualizadoEm ?? "—"} />
           {msUntilNext !== null && !connectionError && <Stat label="próxima em" value={formatCountdown(msUntilNext)} />}
           <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
